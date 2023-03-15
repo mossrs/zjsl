@@ -1,0 +1,4 @@
+class Forbidden(Exception):
+    pass
+
+

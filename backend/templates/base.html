@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{% block title %} {% endblock title %}</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/static/css/animate.min.css">
+	<link rel="stylesheet" href="/static/css/jquery-ui.css">
+	<link rel="stylesheet" href="/static/css/slick.css">
+	<link rel="stylesheet" href="/static/css/chosen.min.css">
+	<link rel="stylesheet" href="/static/css/pe-icon-7-stroke.css">
+	<link rel="stylesheet" href="/static/css/magnific-popup.min.css">
+	<link rel="stylesheet" href="/static/css/lightbox.min.css">
+	<link rel="stylesheet" href="/static/js/fancybox/source/jquery.fancybox.css">
+	<link rel="stylesheet" href="/static/css/jquery.scrollbar.min.css">
+	<link rel="stylesheet" href="/static/css/mobile-menu.css">
+	<link rel="stylesheet" href="/static/fonts/flaticon/flaticon.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/icon/iconfont.css">
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/common.js"></script>
+    <style>
+        #background{
+            border: medium none;
+        }
+    </style>
+
+{#    <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>#}
+{#    <script>#}
+{#        L2Dwidget.init({#}
+{#            "model": { "jsonPath":"https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json", "scale": 1, "hHeadPos":0.5, "vHeadPos":0.618 },#}
+{#            "display": { "position": "right", "width": 200, "height": 250, "hOffset": -50, "vOffset": 0 },#}
+{#            "mobile": { "show": true, "scale": 0.7 },#}
+{#            "react": { "opacityDefault": 0.7, "opacityOnHover": 0.2 }#}
+{#        });#}
+{#    </script>#}
+
+    {% block css %}
+
+    {% endblock css %}
+</head>
+<body class="inblog-page">
+
+
+
+
+    {% block header %}
+
+    <header class="header style7">
+		<div class="top-bar">
+			<div class="container">
+				<div class="top-bar-left">
+					<div class="header-message">
+                        欢迎来到 诗路浙江！
+
+					</div>
+				</div>
+				<div class="top-bar-right">
+
+					<ul class="header-user-links">
+                    {% if user %}
+                        {% if user.username %}
+                            欢迎您！<a href="/usercenter/"><span style="font-weight: bolder;">[ {{ user.username }} ]</span></a>
+                            &emsp;<a href="/logout/">退出登录</a>&nbsp;
+                            {% else %}
+                            <li>
+                                <a href="/login/">登录</a>&nbsp;&nbsp;&nbsp;
+                                <a href="/register/">注册</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="main-header">
+				<div class="row">
+					<div class="col-lg-3 col-sm-4 col-md-3 col-xs-7 col-ts-12 header-element">
+						<div class="logo">
+							<a href="/">
+								<img src="/static/images/img.png" alt="img">
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-7 col-sm-8 col-md-6 col-xs-5 col-ts-12">
+						<div class="block-search-block">
+							<form action="/search/" method="get" class="form-search form-search-width-category">
+								<div class="form-content">
+									<div class="inner">
+										<input type="text" class="input" name="q" value="" placeholder="搜索站内资讯">
+									</div>
+									<button class="btn-search" type="submit">
+										<span class="icon-search"></span>
+									</button>
+
+								</div>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="header-nav-container">
+			<div class="container">
+				<div class="header-nav-wapper main-menu-wapper">
+
+					<div class="header-nav">
+						<div class="container-wapper">
+							<ul class="teamo-clone-mobile-menu teamo-nav main-menu " id="menu-main-menu">
+
+                                {% for channel in channels %}
+                                    <li class="menu-item m-active">
+                                        <a  style="font-weight: normal;font-size: 16px;" href={{ channel.url }} >{{ channel.name }}</a>
+                                    </li>
+                                {% endfor %}
+
+								<li class="menu-item">
+									<a style="font-weight: normal;font-size: 16px;" href="https://baike.baidu.com/item/%E8%AF%97%E7%94%BB%E6%B5%99%E6%B1%9F/24183027" class="teamo-menu-item-title"  >更多</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+{% endblock header %}
+
+
+
+    {% block content %}
+
+        <div class="main-content main-content-blog list left-sidebar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb-trail breadcrumbs">
+						<ul class="trail-items breadcrumb">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+{#            <iframe id="background" style="height: 600px;#}
+{#                            width: 250px;#}
+{#                            margin-left: -100px;#}
+{#                            margin-right: -200px;#}
+                            {#margin-top: -100px;#}
+{#                    float: right;#}
+{#                            top: 500px;" src="/static/js/three.js/examples/webgl_loader_mmd2.html"></iframe>#}
+                {% block rightcontent %}
+
+                {% endblock rightcontent %}
+
+
+
+                {# 侧边栏开始#}
+
+
+                <div class="sidebar sidebar-blog col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                <div class="wrapper-sidebar">
+
+                    <div class="widget widget-categories">
+                        <h3 class="widgettitle"></h3>
+                        <ul class="list-categories">
+                            <li><a href="#">全部</a></li>
+                            {% for category in channels[2].newscategory_set.all() %}
+                                <li><a href={{ channels[0].url }}>{{ category.name }}</a></li>
+                            {% endfor %}
+
+
+                        </ul>
+                    </div>
+                    <div class="widget widget-post">
+                        <h3 class="widgettitle">诗路文化</h3>
+                        <ul class="teamo-posts">
+                            <li class="widget-post-item">
+                                <div class="thumb-blog">
+                                    <img src="/static/images/img_1.png" alt="img">
+                                </div>
+                                <div class="post-content">
+                                    <div class="cat">
+                                    </div>
+                                    <h5 class="post-title"><a href="https://baike.baidu.com/item/%E8%AF%97%E8%B7%AF%E6%96%87%E5%8C%96%E5%B8%A6/24191157">浙江诗路文化带 <span>[...]</span></a></h5>
+                                </div>
+                            </li>
+                            <li class="widget-post-item">
+                                <div class="thumb-blog">
+                                    <img src="/static/images/img_2.png" alt="img">
+                                </div>
+                                <div class="post-content">
+                                    <div class="cat">
+                                    </div>
+                                    <h5 class="post-title"><a href="https://baijiahao.baidu.com/s?id=1695223390502423348">瓯江山水诗路 <span>[...]</span></a></h5>
+                                </div>
+                            </li>
+                            <li class="widget-post-item">
+                                <div class="thumb-blog">
+                                    <img src="/static/images/img_3.png" alt="img">
+                                </div>
+                                <div class="post-content">
+                                    <div class="cat">
+                                    </div>
+                                    <h5 class="post-title"><a href="https://www.zj.gov.cn/art/2020/11/4/art_1229352121_59040754.html">诗路文化主题活动 <span>[...]</span></a></h5>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            {# 侧边栏结束#}
+            <iframe id="background" style="height: 620px;
+                            width: 400px;
+                            margin-left: -100px;
+                            margin-right: 100px;
+                            margin-top: -550px;
+                    {#float: left;#}
+                            top: 500px;" src="/static/js/three.js/examples/webgl_loader_md2.html"></iframe>
+
+            </div>
+		</div>
+	</div>
+        
+
+    {% endblock  content %}
+
+
+
+    
+    {% block footer %}
+
+        <footer class="footer style7">
+		<div class="container">
+			<div class="container-wapper">
+				<div class="footer-end">
+					<div class="row">
+						<div class="col-sm-12 col-xs-12">
+							<div class="coppyright">Copyright © 2020.Company name All rights reserved.
+                                <span>
+                                    <a class="tight" href="http://www.cuz.edu.cn/" target="_blank" rel="nofollow">诗路传媒 有你同行 </a>
+                                </span>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+    {% endblock  footer %}
+    
+
+
+
+    <script src="/static/js/axios-0.18.0.min.js"></script>
+	<script src="/static/js/jquery-1.12.4.min.js"></script>
+	<script src="/static/js/jquery.plugin-countdown.min.js"></script>
+	<script src="/static/js/jquery-countdown.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/magnific-popup.min.js"></script>
+	<script src="/static/js/isotope.min.js"></script>
+	<script src="/static/js/jquery.scrollbar.min.js"></script>
+	<script src="/static/js/jquery-ui.min.js"></script>
+	<script src="/static/js/mobile-menu.js"></script>
+	<script src="/static/js/chosen.min.js"></script>
+	<script src="/static/js/slick.js"></script>
+	<script src="/static/js/jquery.elevateZoom.min.js"></script>
+	<script src="/static/js/jquery.actual.min.js"></script>
+	<script src="/static/js/fancybox/source/jquery.fancybox.js"></script>
+	<script src="/static/js/lightbox.min.js"></script>
+	<script src="/static/js/owl.thumbs.min.js"></script>
+	<script src="/static/js/jquery.scrollbar.min.js"></script>
+	<script src="/static/js/frontend-plugin.js"></script>
+
+    {% block js %}
+
+        <script>
+            function menu_over(ele) {
+
+                ele.style.backgroundColor = 'lightgreen';
+            }
+
+            function menu_out(ele) {
+                ele.style.backgroundColor = '';
+            }
+
+
+        </script>
+
+
+    {% endblock  js %}
+</body>
+</html>

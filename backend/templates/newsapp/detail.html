@@ -1,0 +1,532 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block css %}
+    <style>
+        .shangCls{
+            position:fixed;
+            top:35px;
+            left:400px;
+            z-index:100;
+            border-radius:5px;
+            mso-border-shadow:yes;
+            width: 640px;
+            height: 560px;
+            background: white;
+            border: 1px solid gray;
+        }
+
+        .shangtitle{
+            font-size: 24px;
+            font-weight: 500;
+            margin-left: 16px;
+        }
+
+        .sDiv{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        ._3uZ5OL{
+
+            padding: 48px 20px;
+        }
+
+
+        .flower_count{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .flower_count>div,.flower_count>div:last-child>input{
+            width: 162.5px;
+            align-items: center;
+            height: 56px;
+            line-height: 56px;
+            font-size: 16px;
+            color: #969696;
+            margin-bottom: 12px;
+            margin-right: 12px;
+            border-radius: 10px;
+            border: 1px solid #969696;
+            cursor: pointer;
+            text-align: center;
+
+
+        }
+
+
+
+        .flower_count>div:last-child>input{
+            cursor: text;
+            opacity: 0;
+        }
+
+        .flower_count>div:last-child>input::-webkit-outer-spin-button,
+        .flower_count>div:last-child>input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        #factive{
+            color: #ec7259;
+            border: 1px solid #ec7259;
+        }
+
+        .paymethod{
+            font-size: 15px;
+            margin: 12px 0;
+            text-align: center;
+        }
+
+        .pay_btn{
+            margin-top: 30px;
+            margin-left: 250px;
+        }
+        .comment_post{
+            width: 100%;
+            margin-right: auto;
+        }
+        .comment_show{
+            width: 100%;
+            margin-right: auto;
+        }
+        .comment_list{
+            width: 100%;
+            margin-bottom: auto;
+        }
+        #commentform_title {
+            background-image: url(//static.cnblogs.com/images/icon_addcomment.gif);
+            background-repeat: no-repeat;
+            padding: 0 0 0 25px;
+            margin-bottom: 10px;
+        }
+        .feedback_area_title {
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 20px 0 10px;
+        }
+        #p{
+            border: deepskyblue 1px dashed;
+            background-color: antiquewhite;
+        }
+
+
+
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        // 一键分享
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+
+
+
+        $(function () {
+            $('.shangCls').hide();
+
+           let divs = document.getElementsByName('divOption');
+           for(let i=0;i<divs.length;i++){
+
+
+               $(divs[i]).bind('focus',function (){
+
+                      divs[i].style.border = '1px solid #ec7259';
+                      divs[i].style.color = '#ec7259';
+                      $(divs[i]).attr('checked','true');
+                      pay_amount = $(divs[i]).html();
+                      $('#pay_btn').html('<span>确认支付</span>&nbsp;<span>￥</span>'+$(divs[i]).html());
+
+               });
+
+               $(divs[i]).bind('blur',function (){
+
+                      divs[i].style.border = '1px solid #969696';
+                      divs[i].style.color = '#969696';
+                      $(divs[i]).attr('checked','false');
+
+               });
+
+
+
+
+           }
+
+
+           $('#paymethod>div').each(function (index,item) {
+               if(this.getAttribute('checked')=='checked'){
+                   this.style.border = '1px solid #ec7259';
+                   this.style.color = '#ec7259';
+               }
+
+
+               $(this).bind('focus',function () {
+                   this.style.border = '1px solid #ec7259';
+                   this.style.borderRadius = '5px';
+                   this.style.color = '#ec7259';
+                   this.setAttribute('checked','true');
+               });
+
+               $(this).bind('blur',function () {
+                   this.style.border = 0;
+                   this.style.color = '#969696';
+                   this.removeAttribute('checked');
+               });
+
+           });
+        });
+
+
+
+
+
+
+    </script>
+{% endblock %}
+
+
+{% block rightcontent %}
+    <div id="detailcontent" class="content-area content-blog col-lg-9 col-md-8 col-sm-12 col-xs-12">
+					<div class="site-main">
+						<div class="post-item">
+
+							<div class="post-infor">
+{#								<div class="category-blog">#}
+{#									<a href="#">{{ article.category.name }}</a>#}
+{#								</div>#}
+								<h3 class="post-title">
+									<a href={{ article.channel.url }}>{{ article.title }}</a>
+								</h3>
+								<div class="main-info-post">
+									{{ article.content|safe }}
+                                    
+                                    {% for imgobj in article.articleimage_set.all() %}
+                                        <img src="{{ imgobj.image.url }}" alt="">
+                                    {% endfor %}
+                                    
+								</div>
+							</div>
+                            
+						</div>
+
+						<div class="tags tags-blog">
+							<h3 class="widgettitle">
+								Tags:
+							</h3>
+							<ul class="tagcloud">
+								<li class="tag-cloud-link active">
+									<a href={{ article.channel.url }}>{{ article.category.name }}</a>
+								</li>
+
+
+							</ul>
+						</div>
+						<div class="view-share">
+							<div class="author-view">
+								<div class="author">
+									<div class="avt">
+										<img src="/static/images/favicon.ico" alt="img">
+									</div>
+									<h3 class="name">
+										诗路浙江 &nbsp;&nbsp;<span style="font-size: 12px;">2022-03-15</span>
+                                        &nbsp;&nbsp;&nbsp;<span onclick="$('.shangCls').show();"><span class="iconfont" style="vertical-align:middle;font-size: 22px;">&#xe610;</span>打赏</span>
+									</h3>
+
+								</div>
+								<div class="review">
+									<div class="view">
+										<span class="icon-view">
+											<i class="fa fa-eye" aria-hidden="true"></i>
+										</span>
+										<span class="count">
+											631
+										</span>
+									</div>
+									<div class="s-comments">
+										<span class="icon-cmt">
+											<i class="fa fa-commenting" aria-hidden="true"></i>
+										</span>
+										<span class="count">
+											82
+										</span>
+									</div>
+								</div>
+							</div>
+                            <div class="bdsharebuttonbox share" data-tag="share_1">
+                                <a class="bds_mshare" data-cmd="mshare"></a>
+                                <a class="bds_qzone" data-cmd="qzone" href="#"></a>
+                                <a class="bds_tsina" data-cmd="tsina"></a>
+                                <a class="bds_baidu" data-cmd="baidu"></a>
+                                <a class="bds_renren" data-cmd="renren"></a>
+                                <a class="bds_tqq" data-cmd="tqq"></a>
+                                <a class="bds_more" data-cmd="more">更多</a>
+                                <a class="bds_count" data-cmd="count"></a>
+                            </div>
+						</div>
+
+{#						<div class="comments-area">#}
+{#							<h3 class="custom_blog_title">#}
+{#								评论 <span class="count">(2)条</span>#}
+{#							</h3>#}
+{#							<form class="comment-form">#}
+{#								<p class="comment-reply-content">#}
+{#									<textarea rows="6" placeholder="写下你的评论..." class="input-form"></textarea>#}
+{#								</p>#}
+{#								<p class="form-submit">#}
+{#									<span class="controll">#}
+{#										<i class="icon fa fa-file-image-o" aria-hidden="true"></i>#}
+{#										<i class="icon fa fa-paperclip" aria-hidden="true"></i>#}
+{#										<i class="icon fa fa-smile-o" aria-hidden="true"></i>#}
+{#										<button class="submit button">评论</button>#}
+{#									</span>#}
+{#								</p>#}
+{#							</form>#}
+{#                            {% if hascomment %}#}
+{#                                <ul class="comment-list">#}
+{#								<li class="comment">#}
+{#									<div class="comment-item">#}
+{#										<div class="author-view">#}
+{#											<div class="author">#}
+{#												<div class="avt">#}
+{#													<img src="/static/images/favicon.ico" alt="img">#}
+{#												</div>#}
+{#												<h3 class="name">#}
+{#													Adam Smith#}
+{#												</h3>#}
+{#											</div>#}
+{#											<div class="date-reply-comment">#}
+{#												<span class="date-comment">#}
+{#													4 days ago#}
+{#												</span>#}
+{#											</div>#}
+{#										</div>#}
+{#										<div class="comment-body">#}
+{#											<div class="comment-content">#}
+{#												<p>#}
+{#													Nam sed eleifend dui, eu eleifend leo.#}
+{#													Mauris ornare eros quis placerat mollis.#}
+{#													Duis ornare euismod risus at dictum.#}
+{#													Proinat porttitor metus.#}
+{#													Nunc luctus nisl suscipit, hendrerit ligula non.#}
+{#												</p>#}
+{#											</div>#}
+{#											<div class="comment-reply-link">#}
+{#												<span class="Comment">#}
+{#													<i class="icon fa fa-commenting" aria-hidden="true"></i>#}
+{#													Comment#}
+{#												</span>#}
+{#												<span class="like">#}
+{#													<i class="icon fa fa-thumbs-o-up" aria-hidden="true"></i>#}
+{#													1#}
+{#												</span>#}
+{#												<span class="dislike">#}
+{#													<i class="icon fa fa-thumbs-o-down" aria-hidden="true"></i>#}
+{#												</span>#}
+{#											</div>#}
+{#										</div>#}
+{#									</div>#}
+{#									<ul class="children">#}
+{#										<li>#}
+{#											<div class="comment-item">#}
+{#												<div class="author-view">#}
+{#													<div class="author">#}
+{#														<div class="avt">#}
+{#															<img src="/static/images/favicon.ico" alt="img">#}
+{#														</div>#}
+{#														<h3 class="name">#}
+{#															Samuel Godi#}
+{#														</h3>#}
+{#													</div>#}
+{#													<div class="date-reply-comment">#}
+{#														<span class="date-comment">#}
+{#															4 days ago#}
+{#														</span>#}
+{#													</div>#}
+{#												</div>#}
+{#												<div class="comment-body">#}
+{#													<div class="comment-content">#}
+{#														<p>#}
+{#															Ut pellentesque gravida justo non rhoncus.#}
+{#															Nunc ullamcorper tortor id aliquet luctus.#}
+{#															Proin varius aliquam consequat.Curabitur a commodo diam, vitae pellentesque urna.#}
+{#														</p>#}
+{#													</div>#}
+{#													<div class="comment-reply-link">#}
+{#														<span class="Comment">#}
+{#															<i class="fa fa-commenting" aria-hidden="true"></i>#}
+{#															Comment#}
+{#														</span>#}
+{#														<span class="like">#}
+{#															<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>#}
+{#															9#}
+{#														</span>#}
+{#														<span class="dislike">#}
+{#															<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>#}
+{#															1#}
+{#														</span>#}
+{#													</div>#}
+{#												</div>#}
+{#											</div>#}
+{#										</li>#}
+{#									</ul>#}
+{#								</li>#}
+{#							</ul>#}
+{#                            {% endif %}#}
+{##}
+{#						</div>#}
+{##}
+{#                        {% if hascomment %}#}
+{#                            <div class="pagination clearfix style1">#}
+{#							<div class="nav-link">#}
+{#								<a href="#" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>#}
+{#								<a href="#" class="page-numbers">1</a>#}
+{#								<a href="#" class="page-numbers">2</a>#}
+{#								<a href="#" class="page-numbers current">3</a>#}
+{#								<a href="#" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>#}
+{#							</div>#}
+{#						</div>#}
+{#                        {% endif %}#}
+                            <div class="comment_post">      {# 提交评论区域的div #}
+                                <div id="commentform_title">发表评论</div>
+                                <textarea rows="10" cols="60" id="comment_content"></textarea>
+                                <p><button style="margin-right: auto; float:right;">提交评论</button></p>
+                            </div>
+
+
+                            <div class="comment_show">      {# 评论展示区域的div #}
+                                <div class="feedback_area_title">评论列表</div>
+                                <div class="comment_list">
+                                    {% for comment in comments %}    {# 循环展示评论的数据 #}
+                                        {% if comment.article_id == article.id %}
+                                            <p>用户:{{ comment.comment_author.username }} 在 {{ comment.comment_time }}评论<button class="reply" style="float: right;background-color: silver;width: 10%" username={{ comment.comment_author.username }} pk={{ comment.id }}>回复</button></p>  {# 在此处定义一个回复按钮，用户实现子评论,并且自定义属性username和pk，用于下面回复功能的实现#}
+                                                {% if comment.pre_comment_id %}   {# 判断评论是否有父级评论 #}
+                                                    <p id="p">原评论内容：{{ comment.pre_comment.comment_content }}</p>  {# 如果有父级评论，则在中间显示父级评论的评论内容 #}
+                                                {% endif %}
+                                            <p>评论内容：{{ comment.comment_content }}</p><br>
+                                        {% endif %} 
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
+					</div>
+				</div>
+
+    <div class="shangCls" >
+        <div onclick="$('.shangCls').hide();" style="width: 30px;height: 40px;float: right;cursor: pointer;"><img style='width: 15px;' src="/static/images/no.png" alt=""></div>
+        <div class="_3uZ5OL">
+            <div class="sDiv">
+                <img src="/static/images/favicon.ico" alt="">
+                <div class="shangtitle">给作者送花</div>
+            </div>
+
+            <div class="flower_count">
+                <div name="divOption"  checked="checked"  tabindex="2">2</div>
+                <div name="divOption"  checked="false"  tabindex="2">5</div>
+                <div name="divOption"  checked="false"  tabindex="2">10</div>
+                <div name="divOption"  checked="false"  tabindex="2">20</div>
+                <div name="divOption"  checked="false"  tabindex="2">50</div>
+                <div name="divOption"  checked="false"  tabindex="2">100</div>
+
+            </div>
+
+            <div class="paymethod">选择支付方式</div>
+
+            <div style="text-align: center;" id="paymethod">
+                <div name="zhifubao" onclick="pay_method=1;" style="display: inline-block;width: 160px;height: 50px;line-height: 50px;" tabindex="2"><img src="/static/images/aipay.png" style="width: 25px;" alt="">支付宝支付</div>
+                &nbsp;&nbsp;&nbsp;
+                <div name="weixin" onclick="pay_method=2;" style="display: inline-block;width: 160px;height: 50px;line-height: 50px;" tabindex="2"><img src="/static/images/wexinPay.png" style="width: 30px;" alt="">微信支付</div>
+            </div>
+
+            {{ csrf_input }}
+            <button type="button" class="pay_btn" id="pay_btn" onclick="pay();">
+                <span>确认支付</span>
+                <span>￥</span>2
+            </button>
+        </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        let article_id = '{{ article.id }}';
+        let pay_method = 2;
+        let pay_amount = 0;
+
+        function pay(){
+            // 打赏功能
+            axios.post('/payment/', {
+                'article_id': article_id,
+                'pay_method': pay_method,
+                'pay_amount': pay_amount,
+            }, {
+                headers:
+                    {
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+            }).then(response=>{
+                let code = response.data.code;
+                if (code == 4003){
+                    location.href = '/login/?next='+location.pathname;
+                }else if(code == 200){
+                    location.href = response.data.alipay_url;
+                }else{
+                    location.reload();
+                }
+            }).catch(error=>{
+                console.log(error.response)
+            });
+        }
+
+        var pid = ""        {# 设置一个变量pid默认为空，用于后面作为数据库存储的父级评论的ID，如果没有父级评论则为空，子评论有父级评论 #}
+        {# 提交评论按钮的点击事件 #}
+        $(".comment_post p button").click(function (){
+            if ('{{ request.user }}' == 'AnonymousUser' ){
+                alert("请登录");
+                return false;
+            }
+            if ($("#comment_content").val() == ""){
+                alert("评论内容不能为空");
+                return false;
+            }
+            $.ajax({
+                url: '/comment_control/',
+                type: 'post',
+                data: {
+                    comment_content: $("#comment_content").val(),  {# 提交的数据内容data #}
+                    article_id: {{ article.id }},
+                    pid: pid
+                },
+
+                headers:
+                    {
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+
+                success: function (res){            {# 本例中返回的数据仅仅用于在控制台打印而已 #}
+                    console.log(res)                {# 控制台打印返回的数据 #}
+                    $("#comment_content").val("")   {# 提交完成后，清空评论输入框的内容 #}
+                    pid = ""                        {# 子评论提交完成后，将pid默认设置为空，恢复为默认的父评论 #}
+                    location.reload();
+                }
+            })
+        })
+
+
+        {# 回复按钮的点击事件 #}
+        $(".reply").click(function (){
+            $("#comment_content").focus()       {# 回复按钮的事件，点击时，将光标聚集到评论输入框中 #}
+            var val = "@" + $(this).attr("username") + "\n"    {# $(this)指代".reply"标签本身，获取这个标签的username值 #}
+            $("#comment_content").val(val)      {# 回复时，自动在输入框加入：@要回复的人 #}
+            pid = $(this).attr("pk")            {# 当点击回复时，父评论ID不再为空，此时修改为：对应评论的主键值ID #}
+        })
+    </script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+@mainColor: 		#FFC0CB; // #0197f8
+@subColor:  #3b7459;
+@headerBgColor: 	#87CEFA;
+@boxBgColor: #f5f5f5;
+@dangerColor: #F56C6C;
+
+// 圆角矩形-圆形
+.circle(@width) {
+  width: @width;
+  height: @width;
+  border-radius: calc(~"@{width} / 2");
+}
+.border-radius(@radius: 5px) {
+  border-radius: @radius;
+}

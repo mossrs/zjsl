@@ -1,0 +1,282 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}
+    诗路浙江
+{% endblock title %}
+
+{% block rightcontent %}
+    <div class="content-area content-blog col-lg-9 col-md-8 col-sm-12 col-xs-12">
+        <div class="site-main">
+            <h3 class="custom_blog_title">
+                畅游诗路
+            </h3>
+            <div class="blog-list list-style">
+
+                {% for article in page_articles %}
+                    <div class="blog-item">
+                    <div class="post-format">
+                        <a href="/detail/{{ article.id }}/">
+                            <img src="{{ article.default_img.url }}" alt="img">
+                        </a>
+                    </div>
+                    <div class="post-info">
+                        <div class="category-blog">
+                            <a href="#">{{ article.category.name }}</a>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="/detail/{{ article.id }}/">{{ article.title }}</a>
+                        </h3>
+{#                        <div class="main-info-post">#}
+{#                            <p class="des">#}
+{#                                Vivo X60系列已经入网，距离发布也很近，只是充电功率依旧还是33W，不知道vivo是出于什么样的考虑。而iQOO7采用的却是120W充电，不得不说33W已经落后几代了。[...]#}
+{#                            </p>#}
+{#                        </div>#}
+                        <div class="author-view">
+                            <div class="author">
+                                <div class="avt">
+                                    <img src="/static/images/favicon.ico" alt="img">
+                                </div>
+                                <h3 class="name">
+                                    诗路浙江
+                                </h3>
+                            </div>
+                            <div class="review">
+                                <div class="view">
+                                    <span class="icon-view">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="count">
+                                        631
+                                    </span>
+                                </div>
+                                <div class="s-comments">
+                                    <span class="icon-cmt">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="count">
+                                        82
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+{#                <div class="blog-item">#}
+{#                    <div class="post-format">#}
+{#                        <a href="#">#}
+{#                            <img src="/static/images/dianshang.jpeg" alt="img">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="post-info">#}
+{#                        <div class="category-blog">#}
+{#                            <a href="#">互联网</a>#}
+{#                        </div>#}
+{#                        <h3 class="post-title">#}
+{#                            <a href="#">电商占比如果超过70%，对城市来说将是场灾难？<span>[...]</span></a>#}
+{#                        </h3>#}
+{#                        <div class="main-info-post">#}
+{#                            <p class="des">#}
+{#                                如今电商已经走向家家户户，甚至我们每天都在和电商打着交道，电商的出现也使得我国经济发展局面得到了大量的改善，在竞争的背后相关技术也在不断升级。#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="author-view">#}
+{#                            <div class="author">#}
+{#                                <div class="avt">#}
+{#                                    <img src="/static/images/avt-blog1.png" alt="img">#}
+{#                                </div>#}
+{#                                <h3 class="name">#}
+{#                                    互联狗#}
+{#                                </h3>#}
+{#                            </div>#}
+{#                            <div class="review">#}
+{#                                <div class="view">#}
+{#                                    <span class="icon-view">#}
+{#                                        <i class="fa fa-eye" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        631#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                                <div class="s-comments">#}
+{#                                    <span class="icon-cmt">#}
+{#                                        <i class="fa fa-commenting" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        82#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="blog-item">#}
+{#                    <div class="post-format">#}
+{#                        <a href="#">#}
+{#                            <img src="/static/images/mayuncaifu.jpeg" alt="img">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="post-info">#}
+{#                        <div class="category-blog">#}
+{#                            <a href="#">互联网</a>#}
+{#                        </div>#}
+{#                        <h3 class="post-title">#}
+{#                            <a href="#">马云以4000亿元第四次成中国首富：不懂技术，如何当领导？<span>[...]</span></a>#}
+{#                        </h3>#}
+{#                        <div class="main-info-post">#}
+{#                            <p class="des">#}
+{#                                前段时间，56岁的马云又一次登上了《2020胡润百富榜》，以4000亿财富蝉联榜首，第四次成为中国首富。一年增长1250亿财富，速度之快让不少人羡慕。[...]#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="author-view">#}
+{#                            <div class="author">#}
+{#                                <div class="avt">#}
+{#                                    <img src="/static/images/avt-blog1.png" alt="img">#}
+{#                                </div>#}
+{#                                <h3 class="name">#}
+{#                                    Adam Smith#}
+{#                                </h3>#}
+{#                            </div>#}
+{#                            <div class="review">#}
+{#                                <div class="view">#}
+{#                                    <span class="icon-view">#}
+{#                                        <i class="fa fa-eye" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        631#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                                <div class="s-comments">#}
+{#                                    <span class="icon-cmt">#}
+{#                                        <i class="fa fa-commenting" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        82#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="blog-item">#}
+{#                    <div class="post-format">#}
+{#                        <a href="#">#}
+{#                            <img src="/static/images/weixin.jpeg" alt="img">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="post-info">#}
+{#                        <div class="category-blog">#}
+{#                            <a href="#">软件</a>#}
+{#                        </div>#}
+{#                        <h3 class="post-title">#}
+{#                            <a href="/templates/newsapp/index.html/">下一代“微信”，华为制造？<span>[...]</span></a>#}
+{#                        </h3>#}
+{#                        <div class="main-info-post">#}
+{#                            <p class="des">#}
+{#                                2019年1月15日，多闪、马桶MT、聊天宝三款社交APP同一天发布，颇有“三英战吕布”的气势，一时间“谁会取代微信”成了大家讨论最多的话题。但事后“蚍蜉撼大树”的无情结局给摇旗呐喊者深深上了一课，从那时起，“取代微信”这样的话题再也没被广泛提及。#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="author-view">#}
+{#                            <div class="author">#}
+{#                                <div class="avt">#}
+{#                                    <img src="/static/images/avt-blog1.png" alt="img">#}
+{#                                </div>#}
+{#                                <h3 class="name">#}
+{#                                    中国移动手机俱乐部#}
+{#                                </h3>#}
+{#                            </div>#}
+{#                            <div class="review">#}
+{#                                <div class="view">#}
+{#                                    <span class="icon-view">#}
+{#                                        <i class="fa fa-eye" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        631#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                                <div class="s-comments">#}
+{#                                    <span class="icon-cmt">#}
+{#                                        <i class="fa fa-commenting" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        82#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="blog-item">#}
+{#                    <div class="post-format">#}
+{#                        <a href="#">#}
+{#                            <img src="/static/images/jiaju.png" alt="img">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="post-info">#}
+{#                        <div class="category-blog">#}
+{#                            <a href="#">智能家居</a>#}
+{#                        </div>#}
+{#                        <h3 class="post-title">#}
+{#                            <a href="#">吃土也要入手的6个智能家居，每个都让人欲罢不能，装修前早知道 <span>[...]</span></a>#}
+{#                        </h3>#}
+{#                        <div class="main-info-post">#}
+{#                            <p class="des">#}
+{#                                随着智能AI和物联网的普及，智能家居已成为装修的标配，也是家居提升舒适度和品质的重要途经。新房装修很快将会进入全屋智能化的时代，那么有哪些智能化家居产品是一定要选择的呢？#}
+{#                            </p>#}
+{#                        </div>#}
+{#                        <div class="author-view">#}
+{#                            <div class="author">#}
+{#                                <div class="avt">#}
+{#                                    <img src="/static/images/avt-blog1.png" alt="img">#}
+{#                                </div>#}
+{#                                <h3 class="name">#}
+{#                                    设计本本#}
+{#                                </h3>#}
+{#                            </div>#}
+{#                            <div class="review">#}
+{#                                <div class="view">#}
+{#                                    <span class="icon-view">#}
+{#                                        <i class="fa fa-eye" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        631#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                                <div class="s-comments">#}
+{#                                    <span class="icon-cmt">#}
+{#                                        <i class="fa fa-commenting" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    <span class="count">#}
+{#                                        82#}
+{#                                    </span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+            </div>
+            <div class="pagination clearfix style2">
+                <div class="nav-link">
+                    {% if page_articles.has_previous() %}
+                        <a href="/list/{{ channel_id }}/{{ page_articles.number - 1 }}/" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+                    {% endif %}
+                    {% for page_num in range(1, page_articles.paginator.num_pages + 1) %}
+                        <a href="/list/{{ channel_id }}/{{ page_num}}/" class="page-numbers {% if page_num == page_articles.number %}current{% endif %}">{{ page_num }}</a>
+                    {% endfor %}
+{#                    <a href="#" class="page-numbers">2</a>#}
+{#                    <a href="#" class="page-numbers">3</a>#}
+                    {% if page_articles.has_next() %}
+                        <a href="/list/{{ channel_id }}/{{ page_articles.number + 1 }}/" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock rightcontent %}
+
+
+
+

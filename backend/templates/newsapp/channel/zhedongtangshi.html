@@ -1,0 +1,84 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}
+    浙东唐诗路
+{% endblock title %}
+
+{% block rightcontent %}
+    <div class="content-area content-blog col-lg-9 col-md-8 col-sm-12 col-xs-12">
+        <div class="site-main">
+            <h3 class="custom_blog_title">
+                浙东唐诗路
+            </h3>
+            <div class="blog-list list-style">
+
+                {% for article in page_articles %}
+                    <div class="blog-item">
+                    <div class="post-format">
+                        <a href="/detail/{{ article.id }}/">
+                            <img src="{{ article.default_img.url }}" alt="img">
+                        </a>
+                    </div>
+                    <div class="post-info">
+                        <div class="category-blog">
+                            <a href="#">{{ article.category.name }}</a>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="/detail/{{ article.id }}/">{{ article.title }}</a>
+                        </h3>
+                        <div class="author-view">
+                            <div class="author">
+                                <div class="avt">
+                                    <img src="/static/images/favicon.ico" alt="img">
+                                </div>
+                                <h3 class="name">
+                                    诗路浙江
+                                </h3>
+                            </div>
+                            <div class="review">
+                                <div class="view">
+                                    <span class="icon-view">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="count">
+                                        631
+                                    </span>
+                                </div>
+                                <div class="s-comments">
+                                    <span class="icon-cmt">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="count">
+                                        82
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+            <div class="pagination clearfix style2">
+                <div class="nav-link">
+                    {% if page_articles.has_previous() %}
+                        <a href="/zhedonglist/{{ channel_id }}/{{ page_articles.number - 1 }}/" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+                    {% endif %}
+                    {% for page_num in range(1, page_articles.paginator.num_pages + 1) %}
+                        <a href="/zhedonglist/{{ channel_id }}/{{ page_num}}/" class="page-numbers {% if page_num == page_articles.number %}current{% endif %}">{{ page_num }}</a>
+                    {% endfor %}
+                    {% if page_articles.has_next() %}
+                        <a href="/zhedonglist/{{ channel_id }}/{{ page_articles.number + 1 }}/" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock rightcontent %}
+
+
+
+

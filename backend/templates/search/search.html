@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}诗路浙江{% endblock %}
+
+
+{% block header_nav %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="content-area shop-grid-content full-width col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="site-main">
+
+            <hr/>
+            <ul class="row list-products auto-clear equal-container product-grid">
+                {% for result in page %}
+                     <li class="product-item  col-lg-3 col-md-4 col-sm-6 col-xs-6 col-ts-12 style-1">
+                    <div class="product-inner equal-element" >
+
+                        <div class="product-thumb" style="height: 220px;">
+                            <div class="thumb-inner">
+                                <a href="/detail/{{ result.object.id }}/">
+                                    <img src="{{ result.object.default_img.url }}" alt="img">
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-name product_title" >
+                                <a href="/detail/{{ result.object.id }}/">{{ result.object.title }}</a>
+                            </h5>
+
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                    <p>未查询到结果。</p>
+                {% endfor %}
+
+
+
+            </ul>
+
+            <div class="pagination clearfix style2">
+                <div class="nav-link">
+                    {% if page.has_previous() %}
+                        <a href="/search/?q={{ query }}&page={{ page.number - 1 }}" class="page-numbers"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+                    {% endif %}
+                    {% for num in  range(1,page.paginator.num_pages + 1) %}
+                        <a href="/search/?q={{ query }}&page={{ num }}" class="page-numbers {% if page.number == num %}current{% endif %}">{{ num }}</a>
+                    {% endfor %}
+
+
+                    {% if page.has_next() %}
+                        <a href="/search/?q={{ query }}&page={{ page.number + 1 }}" class="page-numbers"><i class="icon fa fa-angle-right" aria-hidden="true"></i></a>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="width:100%;height: 500px;"></div>
+{% endblock %}
+
+
+
+
